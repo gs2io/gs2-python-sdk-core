@@ -37,8 +37,8 @@ jobs:
           command: |
             python setup.py sdist
             if [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              twine register --repository-url https://test.pypi.org/legacy dist/*
-              twine upload --repository-url https://test.pypi.org/legacy dist/*
+              twine register dist/* --repository-url https://test.pypi.org/legacy
+              twine upload dist/*  --repository-url https://test.pypi.org/legacy
             fi
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               twine register dist/*
