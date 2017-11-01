@@ -19,7 +19,7 @@ jobs:
           name: OSの初期設定
           command: |
             apt-get update && apt-get install less zip -y
-            pip install awscli
+            pip install awscli twine
       -
         run:
           name: 依存関係のインストール
@@ -35,13 +35,14 @@ jobs:
       -
         deploy:
           command: |
+            python setup.py sdist
             if [ "${CIRCLE_BRANCH}" == "develop" ]; then
-              python setup.py register -r https://testpypi.python.org/pypi
-              python setup.py sdist upload -r https://testpypi.python.org/pypi
+              twine register dist/* --repository-url https://test.pypi.org/legacy dist/*
+              twine upload dist/* --repository-url https://test.pypi.org/legacy dist/*
             fi
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              python setup.py register
-              python setup.py sdist upload
+              twine register dist/*
+              twine upload dist/*
             fi
       -
         store_test_results:
