@@ -29,31 +29,31 @@ class Gs2UserRequest(Gs2BasicRequest):
         if params is None:
             self.__access_token = None
         else:
-            self.__set_access_token(params['X-GS2-ACCESS-TOKEN'] if 'X-GS2-ACCESS-TOKEN' in params.keys() else None)
+            self.set_access_token(params['X-GS2-ACCESS-TOKEN'] if 'X-GS2-ACCESS-TOKEN' in params.keys() else None)
 
-    def __get_access_token(self):
+    def get_access_token(self):
         """
         GS2 クライアントIDを設定
         :return: GS2 クライアントID
-        :rtype: str
+        :rtype: unicode
         """
         return self.__access_token
 
-    def __set_access_token(self, access_token):
+    def set_access_token(self, access_token):
         """
         GS2 クライアントIDを設定
         :param access_token: GS2クライアントID
-        :type access_token: str
+        :type access_token: unicode
         """
         if not isinstance(access_token, str) and not isinstance(access_token, unicode):
             raise TypeError()
         self.__access_token = access_token
 
-    def __with_access_token(self, access_token):
+    def with_access_token(self, access_token):
         """
         GS2 クライアントIDを設定
         :param access_token: GS2クライアントID
-        :type access_token: str
+        :type access_token: unicode
         """
-        self.__set_access_token(access_token)
+        self.set_access_token(access_token)
         return self

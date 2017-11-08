@@ -28,9 +28,15 @@ class Gs2BasicRequest(object):
             self.__timestamp = None
             self.__request_sign = None
         else:
-            self.__set_client_id(params['X-GS2-CLIENT-ID'] if 'X-GS2-CLIENT-ID' in params.keys() else None)
-            self.__set_timestamp(params['X-GS2-TIMESTAMP'] if 'X-GS2-TIMESTAMP' in params.keys() else None)
-            self.__set_request_sign(params['X-GS2-REQUEST-SIGN'] if 'X-GS2-REQUEST-SIGN' in params.keys() else None)
+            client_id = params['X-GS2-CLIENT-ID'] if 'X-GS2-CLIENT-ID' in params.keys() else None
+            if client_id is not None:
+                self.__set_client_id(client_id)
+            timestamp = params['X-GS2-TIMESTAMP'] if 'X-GS2-TIMESTAMP' in params.keys() else None
+            if timestamp is not None:
+                self.__set_timestamp(timestamp)
+            request_sign = params['X-GS2-REQUEST-SIGN'] if 'X-GS2-REQUEST-SIGN' in params.keys() else None
+            if request_sign is not None:
+                self.__set_request_sign(request_sign)
 
     def __get_client_id(self):
         """
