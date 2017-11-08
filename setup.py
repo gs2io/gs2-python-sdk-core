@@ -6,11 +6,13 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='gs2-python-sdk-core',
-    version='1.0.1',
+    version='1.0.2',
     package_dir={'': 'src'},
     packages=[
         "",
         "gs2_core_client",
+        "gs2_core_client.model",
+        "gs2_core_client.exception",
     ],
     license='Apache License 2.0',
     description='GS2 SDK for Python - Core Library.',
