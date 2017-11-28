@@ -13,9 +13,10 @@
 # on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
+from gs2_core_client.exception.Gs2Exception import Gs2Exception
 
 
-class UnauthorizedException(IOError):
+class UnauthorizedException(Gs2Exception):
 
     def __init__(self, message):
-        super(IOError, self).__init__(message)
+        super(Gs2Exception, self).__init__(message)
