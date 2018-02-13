@@ -27,6 +27,7 @@ class Gs2BasicRequest(object):
             self.__client_id = None
             self.__timestamp = None
             self.__request_sign = None
+            self.__request_id = None
         else:
             client_id = params['X-GS2-CLIENT-ID'] if 'X-GS2-CLIENT-ID' in params.keys() else None
             if client_id is not None:
@@ -37,6 +38,9 @@ class Gs2BasicRequest(object):
             request_sign = params['X-GS2-REQUEST-SIGN'] if 'X-GS2-REQUEST-SIGN' in params.keys() else None
             if request_sign is not None:
                 self.__set_request_sign(request_sign)
+            request_id = params['X-GS2-REQUEST-ID'] if 'X-GS2-REQUEST-ID' in params.keys() else None
+            if request_id is not None:
+                self.__set_request_id(request_id)
 
     def __get_client_id(self):
         """
@@ -76,7 +80,7 @@ class Gs2BasicRequest(object):
     def __set_timestamp(self, timestamp):
         """
         リクエスト時刻を設定
-        :param timestamp: GS2クライアントID
+        :param timestamp: リクエスト時刻
         :type timestamp: str
         """
         if not isinstance(timestamp, str) and not isinstance(timestamp, unicode):
@@ -86,7 +90,7 @@ class Gs2BasicRequest(object):
     def __with_timestamp(self, timestamp):
         """
         リクエスト時刻を設定
-        :param timestamp: GS2クライアントID
+        :param timestamp: リクエスト時刻
         :type timestamp: str
         """
         self.__set_timestamp(timestamp)
@@ -103,7 +107,7 @@ class Gs2BasicRequest(object):
     def __set_request_sign(self, request_sign):
         """
         署名を設定
-        :param request_sign: GS2クライアントID
+        :param request_sign: 署名
         :type request_sign: str
         """
         if not isinstance(request_sign, str) and not isinstance(request_sign, unicode):
@@ -113,8 +117,35 @@ class Gs2BasicRequest(object):
     def __with_request_sign(self, request_sign):
         """
         署名を設定
-        :param request_sign: GS2クライアントID
+        :param request_sign: 署名
         :type request_sign: str
         """
         self.__set_request_sign(request_sign)
+        return self
+
+    def __get_request_id(self):
+        """
+        リクエストIDを設定
+        :return: リクエストID
+        :rtype: str
+        """
+        return self.__request_id
+
+    def __set_request_id(self, request_id):
+        """
+        リクエストIDを設定
+        :param request_id: リクエストID
+        :type request_id: str
+        """
+        if not isinstance(request_id, str) and not isinstance(request_id, unicode):
+            raise TypeError()
+        self.__request_id = request_id
+
+    def __with_request_id(self, request_id):
+        """
+        リクエストIDを設定
+        :param request_id: リクエストID
+        :type request_id: str
+        """
+        self.__set_request_id(request_id)
         return self
