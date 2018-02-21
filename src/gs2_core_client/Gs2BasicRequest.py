@@ -123,7 +123,7 @@ class Gs2BasicRequest(object):
         self.__set_request_sign(request_sign)
         return self
 
-    def __get_request_id(self):
+    def get_request_id(self):
         """
         リクエストIDを設定
         :return: リクエストID
@@ -131,7 +131,7 @@ class Gs2BasicRequest(object):
         """
         return self.__request_id
 
-    def __set_request_id(self, request_id):
+    def set_request_id(self, request_id):
         """
         リクエストIDを設定
         :param request_id: リクエストID
@@ -141,11 +141,11 @@ class Gs2BasicRequest(object):
             raise TypeError()
         self.__request_id = request_id
 
-    def __with_request_id(self, request_id):
+    def with_request_id(self, request_id):
         """
         リクエストIDを設定
         :param request_id: リクエストID
         :type request_id: str
         """
-        self.__set_request_id(request_id)
+        self.set_request_id(request_id)
         return self
