@@ -17,5 +17,5 @@
 
 class Gs2Constant(object):
 
-    ENDPOINT_HOST = "https://{service}.{region}.gs2.io"
+    ENDPOINT_HOST = "https://{service}.{region}.gs2io.com"
 
