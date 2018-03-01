@@ -6,7 +6,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='gs2-python-sdk-core',
-    version='1.0.7',
+    version='1.0.8',
     package_dir={'': 'src'},
     packages=[
         "",

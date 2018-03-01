@@ -40,7 +40,7 @@ class Gs2BasicRequest(object):
                 self.__set_request_sign(request_sign)
             request_id = params['X-GS2-REQUEST-ID'] if 'X-GS2-REQUEST-ID' in params.keys() else None
             if request_id is not None:
-                self.__request_id(request_id)
+                self.set_request_id(request_id)
 
     def __get_client_id(self):
         """
