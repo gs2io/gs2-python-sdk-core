@@ -31,7 +31,8 @@ class AbstractGs2Client(object):
         self.__credential = credential
         self.__region = region
 
-    def __parse_response(self, response):
+    @staticmethod
+    def __parse_response(response):
         """
         HTTPレスポンスをパースする
         :param response: HTTPレスポンス
@@ -110,17 +111,17 @@ class AbstractGs2Client(object):
 
         return self.__parse_response(response)
 
-    def _do_post_request(self, url, service, module, function, body, headers):
+    def _do_post_request(self, url, service, component, target_function, body, headers):
         """
         POSTリクエストを発行する
         :param url: URL
         :type url: unicode
         :param service: サービス名
         :type service: str
-        :param module: モジュール名
-        :type module: str
-        :param function: ファンクション名
-        :type function: str
+        :param component: モジュール名
+        :type component: str
+        :param target_function: ファンクション名
+        :type target_function: str
         :param body: POST Body
         :type body: dict
         :param headers: リクエストヘッダ
@@ -132,8 +133,8 @@ class AbstractGs2Client(object):
         from gs2_core_client.fast_requests import requests
 
         self.__credential.authorized(
-            module=module,
-            function=function,
+            module=component,
+            function=target_function,
             headers=headers,
             timestamp=int(time.time())
         )
@@ -146,17 +147,17 @@ class AbstractGs2Client(object):
 
         return self.__parse_response(response)
 
-    def _do_put_request(self, url, service, module, function, body, headers):
+    def _do_put_request(self, url, service, component, target_function, body, headers):
         """
         PUTリクエストを発行する
         :param url: URL
         :type url: unicode
         :param service: サービス名
         :type service: str
-        :param module: モジュール名
-        :type module: str
-        :param function: ファンクション名
-        :type function: str
+        :param component: モジュール名
+        :type component: str
+        :param target_function: ファンクション名
+        :type target_function: str
         :param body: POST Body
         :type body: dict
         :param headers: リクエストヘッダ
@@ -168,8 +169,8 @@ class AbstractGs2Client(object):
         from gs2_core_client.fast_requests import requests
 
         self.__credential.authorized(
-            module=module,
-            function=function,
+            module=component,
+            function=target_function,
             headers=headers,
             timestamp=int(time.time())
         )
@@ -182,17 +183,17 @@ class AbstractGs2Client(object):
 
         return self.__parse_response(response)
 
-    def _do_delete_request(self, url, service, module, function, query_strings, headers):
+    def _do_delete_request(self, url, service, component, target_function, query_strings, headers):
         """
         DELETEリクエストを発行する
         :param url: URL
         :type url: unicode
         :param service: サービス名
         :type service: str
-        :param module: モジュール名
-        :type module: str
-        :param function: ファンクション名
-        :type function: str
+        :param component: モジュール名
+        :type component: str
+        :param target_function: ファンクション名
+        :type target_function: str
         :param query_strings: クエリストリング
         :type query_strings: dict
         :param headers: リクエストヘッダ
@@ -204,8 +205,8 @@ class AbstractGs2Client(object):
         from gs2_core_client.fast_requests import requests
 
         self.__credential.authorized(
-            module=module,
-            function=function,
+            module=component,
+            function=target_function,
             headers=headers,
             timestamp=int(time.time())
         )

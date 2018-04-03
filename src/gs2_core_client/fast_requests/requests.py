@@ -251,10 +251,14 @@ def get(
                 headers=headers,
             )
             response = connection.getresponse()
+            try:
+                result = result.encode('utf-8')
+            except UnicodeDecodeError:
+                pass
             return HttpResponse(
                 status_code=response.status,
                 headers=dict(response.getheaders()),
-                body=response.read().encode('utf-8')
+                body=result
             )
         except (HTTPException, socket.error) as e:
             _purge_connection_cache(url)
@@ -329,10 +333,14 @@ def post(
                 body=data,
             )
             response = connection.getresponse()
+            try:
+                result = result.encode('utf-8')
+            except UnicodeDecodeError:
+                pass
             return HttpResponse(
                 status_code=response.status,
                 headers=dict(response.getheaders()),
-                body=response.read().encode('utf-8')
+                body=result
             )
         except (HTTPException, socket.error) as e:
             _purge_connection_cache(url)
@@ -407,10 +415,14 @@ def put(
                 body=data,
             )
             response = connection.getresponse()
+            try:
+                result = result.encode('utf-8')
+            except UnicodeDecodeError:
+                pass
             return HttpResponse(
                 status_code=response.status,
                 headers=dict(response.getheaders()),
-                body=response.read().encode('utf-8')
+                body=result
             )
         except (HTTPException, socket.error) as e:
             _purge_connection_cache(url)
@@ -473,10 +485,14 @@ def delete(
                 headers=headers,
             )
             response = connection.getresponse()
+            try:
+                result = result.encode('utf-8')
+            except UnicodeDecodeError:
+                pass
             return HttpResponse(
                 status_code=response.status,
                 headers=dict(response.getheaders()),
-                body=response.read().encode('utf-8')
+                body=result
             )
         except (HTTPException, socket.error) as e:
             _purge_connection_cache(url)
