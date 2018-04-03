@@ -35,7 +35,7 @@ class AbstractGs2Client(object):
         """
         HTTPレスポンスをパースする
         :param response: HTTPレスポンス
-        :type response: requests.models.Response
+        :type response: aws_sdk_for_serverless.common.fast_requests.requests.HttpResponse
         :return: レスポンス
         :rtype: dict
         """
@@ -74,17 +74,17 @@ class AbstractGs2Client(object):
             pass
         raise RuntimeError('[' + str(response.status_code) + '] ' + str(response.text))
 
-    def _do_get_request(self, url, service, module, function, query_strings, headers):
+    def _do_get_request(self, url, service, component, target_function, query_strings, headers):
         """
         GETリクエストを発行する
         :param url: URL
         :type url: unicode
         :param service: サービス名
         :type service: str
-        :param module: モジュール名
-        :type module: str
-        :param function: ファンクション名
-        :type function: str
+        :param component: モジュール名
+        :type component: str
+        :param target_function: ファンクション名
+        :type target_function: str
         :param query_strings: クエリストリング
         :type query_strings: dict
         :param headers: リクエストヘッダ
@@ -93,11 +93,11 @@ class AbstractGs2Client(object):
         :rtype: dict
         """
         import time
-        import requests
+        from gs2_core_client.fast_requests import requests
 
         self.__credential.authorized(
-            module=module,
-            function=function,
+            module=component,
+            function=target_function,
             headers=headers,
             timestamp=int(time.time())
         )
@@ -129,7 +129,7 @@ class AbstractGs2Client(object):
         :rtype: dict
         """
         import time
-        import requests
+        from gs2_core_client.fast_requests import requests
 
         self.__credential.authorized(
             module=module,
@@ -165,7 +165,7 @@ class AbstractGs2Client(object):
         :rtype: dict
         """
         import time
-        import requests
+        from gs2_core_client.fast_requests import requests
 
         self.__credential.authorized(
             module=module,
@@ -201,7 +201,7 @@ class AbstractGs2Client(object):
         :rtype: dict
         """
         import time
-        import requests
+        from gs2_core_client.fast_requests import requests
 
         self.__credential.authorized(
             module=module,
