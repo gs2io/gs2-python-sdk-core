@@ -251,6 +251,7 @@ def get(
                 headers=headers,
             )
             response = connection.getresponse()
+            result = response.read()
             try:
                 result = result.encode('utf-8')
             except UnicodeDecodeError:
@@ -333,6 +334,7 @@ def post(
                 body=data,
             )
             response = connection.getresponse()
+            result = response.read()
             try:
                 result = result.encode('utf-8')
             except UnicodeDecodeError:
@@ -415,6 +417,7 @@ def put(
                 body=data,
             )
             response = connection.getresponse()
+            result = response.read()
             try:
                 result = result.encode('utf-8')
             except UnicodeDecodeError:
@@ -485,6 +488,7 @@ def delete(
                 headers=headers,
             )
             response = connection.getresponse()
+            result = response.read()
             try:
                 result = result.encode('utf-8')
             except UnicodeDecodeError:
