@@ -17,19 +17,16 @@
 from gs2_core_client.model.IGs2Credential import IGs2Credential
 
 
-class BasicGs2Credential(IGs2Credential):
+class OnetimeGs2Credential(IGs2Credential):
 
-    def __init__(self, client_id, client_secret):
+    def __init__(self, onetime_token):
         """
         コンストラクタ
-        :param client_id: クライアントID
-        :type client_id: str
-        :param client_secret: クライアントシークレット
-        :type client_secret: str
+        :param onetime_token: ワンタイムトークン
+        :type onetime_token: str
         """
         super(IGs2Credential, self).__init__()
-        self.__client_id = client_id
-        self.__client_secret = client_secret
+        self.__onetime_token = onetime_token
 
     def authorized(self, module, function, headers, timestamp):
         """
@@ -43,15 +40,5 @@ class BasicGs2Credential(IGs2Credential):
         :param timestamp: リクエスト時間
         :type timestamp: int
         """
-        import base64
-        import hashlib
-        import hmac
-
-        headers['X-GS2-CLIENT-ID'] = self.__client_id
+        headers['X-GS2-ONETIME-TOKEN'] = self.__onetime_token
         headers['X-GS2-REQUEST-TIMESTAMP'] = str(timestamp)
-        headers['X-GS2-REQUEST-SIGN'] = base64.b64encode(
-            hmac.new(
-                base64.b64decode(self.__client_secret),
-                module + ":" + function + ":" + str(timestamp),
-                hashlib.sha256
-            ).digest())
