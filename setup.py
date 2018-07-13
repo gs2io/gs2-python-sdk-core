@@ -16,7 +16,6 @@ setup(
         "gs2_core_client.exception",
     ],
     install_requires=[
-        'httplib >= 2.5.3',
         'pycrypto >= 2.6.1',
     ],
     tests_require=[],
