@@ -6,7 +6,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='gs2-python-sdk-core',
-    version='1.1.9',
+    version='1.1.10',
     package_dir={'': 'src'},
     packages=[
         "",
@@ -15,6 +15,11 @@ setup(
         "gs2_core_client.model",
         "gs2_core_client.exception",
     ],
+    install_requires=[
+        'httplib >= 2.5.3',
+        'pycrypto >= 2.6.1',
+    ],
+    tests_require=[],
     license='Apache License 2.0',
     description='GS2 SDK for Python - Core Library.',
     url='https://gs2.io/',
