@@ -108,16 +108,17 @@ def _get_port(url):
     :return: ポート番号
     :rtype: int
     """
-    url_without_protocol = url[len(_get_protocol(url)) + 3:]
+    protocol = _get_protocol(url)
+    url_without_protocol = url[len(protocol) + 3:]
     colon_pos = url_without_protocol.find(':')
-    if colon_pos == -1:
-        if _get_protocol(url) == 'http':
-            return 80
-        if _get_protocol(url) == 'https':
-            return 443
     slash_pos = url_without_protocol.find('/')
     if slash_pos == -1:
-        return int(url_without_protocol[colon_pos + 1:])
+        slash_pos = len(url_without_protocol)
+    if colon_pos == -1 or colon_pos > slash_pos:
+        if protocol == 'http':
+            return 80
+        if protocol == 'https':
+            return 443
     return int(url_without_protocol[colon_pos + 1:slash_pos])
 
 
