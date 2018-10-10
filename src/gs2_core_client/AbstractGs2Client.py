@@ -40,40 +40,43 @@ class AbstractGs2Client(object):
         :return: レスポンス
         :rtype: dict
         """
-        try:
-            import json
-            if response.status_code == 200:
+        if response.status_code == 200:
+            try:
+                import json
                 return json.loads(response.text)
-            if response.status_code == 400:
-                from gs2_core_client.exception.BadRequestException import BadRequestException
-                raise BadRequestException(json.loads(response.text)['message'])
-            if response.status_code == 401:
-                from gs2_core_client.exception.UnauthorizedException import UnauthorizedException
-                raise UnauthorizedException(json.loads(response.text)['message'])
-            if response.status_code == 402:
-                from gs2_core_client.exception.QuotaExceedException import QuotaExceedException
-                raise QuotaExceedException(json.loads(response.text)['message'])
-            if response.status_code == 404:
-                from gs2_core_client.exception.NotFoundException import NotFoundException
-                raise NotFoundException(json.loads(response.text)['message'])
-            if response.status_code == 409:
-                from gs2_core_client.exception.ConflictException import ConflictException
-                raise ConflictException(json.loads(response.text)['message'])
-            if response.status_code == 500:
-                from gs2_core_client.exception.InternalServerErrorException import InternalServerErrorException
-                raise InternalServerErrorException(json.loads(response.text)['message'])
-            if response.status_code == 502:
-                from gs2_core_client.exception.BadGatewayException import BadGatewayException
-                raise BadGatewayException(json.loads(response.text)['message'])
-            if response.status_code == 503:
-                from gs2_core_client.exception.ServiceUnavailableException import ServiceUnavailableException
-                raise ServiceUnavailableException('')
-            if response.status_code == 504:
-                from gs2_core_client.exception.RequestTimeoutException import RequestTimeoutException
-                raise RequestTimeoutException(json.loads(response.text)['message'])
-        except ValueError:
-            pass
-        raise RuntimeError('[' + str(response.status_code) + '] ' + str(response.text))
+            except ValueError:
+                from gs2_core_client.exception.UnknownException import UnknownException
+                raise UnknownException(response.text)
+        elif response.status_code == 400:
+            from gs2_core_client.exception.BadRequestException import BadRequestException
+            raise BadRequestException(response.text)
+        elif response.status_code == 401:
+            from gs2_core_client.exception.UnauthorizedException import UnauthorizedException
+            raise UnauthorizedException(response.text)
+        elif response.status_code == 402:
+            from gs2_core_client.exception.QuotaExceedException import QuotaExceedException
+            raise QuotaExceedException(response.text)
+        elif response.status_code == 404:
+            from gs2_core_client.exception.NotFoundException import NotFoundException
+            raise NotFoundException(response.text)
+        elif response.status_code == 409:
+            from gs2_core_client.exception.ConflictException import ConflictException
+            raise ConflictException(response.text)
+        elif response.status_code == 500:
+            from gs2_core_client.exception.InternalServerErrorException import InternalServerErrorException
+            raise InternalServerErrorException(response.text)
+        elif response.status_code == 502:
+            from gs2_core_client.exception.BadGatewayException import BadGatewayException
+            raise BadGatewayException(response.text)
+        elif response.status_code == 503:
+            from gs2_core_client.exception.ServiceUnavailableException import ServiceUnavailableException
+            raise ServiceUnavailableException('')
+        elif response.status_code == 504:
+            from gs2_core_client.exception.RequestTimeoutException import RequestTimeoutException
+            raise RequestTimeoutException(response.text)
+        else:
+            from gs2_core_client.exception.UnknownException import UnknownException
+            raise UnknownException(response.text)
 
     def _do_get_request(self, url, service, component, target_function, query_strings, headers):
         """

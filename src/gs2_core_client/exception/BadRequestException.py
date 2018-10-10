@@ -19,4 +19,4 @@ from gs2_core_client.exception.Gs2Exception import Gs2Exception
 class BadRequestException(Gs2Exception):
 
     def __init__(self, message):
-        super(Gs2Exception, self).__init__(message)
+        super(BadRequestException, self).__init__(message)

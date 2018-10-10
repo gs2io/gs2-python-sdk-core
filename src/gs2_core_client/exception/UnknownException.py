@@ -16,7 +16,7 @@
 from gs2_core_client.exception.Gs2Exception import Gs2Exception
 
 
-class InternalServerErrorException(Gs2Exception):
+class UnknownException(Gs2Exception):
 
     def __init__(self, message):
-        super(InternalServerErrorException, self).__init__(message)
+        super(UnknownException, self).__init__(message)
