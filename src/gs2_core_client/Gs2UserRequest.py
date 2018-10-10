@@ -45,7 +45,7 @@ class Gs2UserRequest(Gs2BasicRequest):
         :param access_token: GS2クライアントID
         :type access_token: unicode
         """
-        if not isinstance(access_token, str) and not isinstance(access_token, unicode):
+        if not isinstance(access_token, str) and not isinstance(access_token, unicode) and access_token is not None:
             raise TypeError()
         self.__access_token = access_token
 
