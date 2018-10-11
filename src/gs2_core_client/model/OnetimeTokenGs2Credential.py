@@ -17,7 +17,7 @@
 from gs2_core_client.model.IGs2Credential import IGs2Credential
 
 
-class OnetimeGs2Credential(IGs2Credential):
+class OnetimeTokenGs2Credential(IGs2Credential):
 
     def __init__(self, onetime_token):
         """
